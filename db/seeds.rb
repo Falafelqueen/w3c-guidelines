@@ -29,7 +29,7 @@ doc.search('#user-experience-design section').each do |section|
 
     # get the guideline description
 
-    g.description = section.search('.header-wrapper + p').text
+    g.description = section.search('.header-wrapper + p').first.text
 
     section.search('.benefits li').each do |li|
       # get the guideline benefits
@@ -85,7 +85,7 @@ doc.search('#web-development section').each do |section|
 
     # get the guideline description
 
-    g.description = section.search('.header-wrapper + p').text
+    g.description = section.search('.header-wrapper + p').first.text
 
     section.search('.benefits li').each do |li|
       # get the guideline benefits
@@ -139,7 +139,7 @@ doc.search('#hosting-infrastructure-and-systems section').each do |section|
 
     # get the guideline description
 
-    g.description = section.search('.header-wrapper + p').text
+    g.description = section.search('.header-wrapper + p').first.text
 
     section.search('.benefits li').each do |li|
       # get the guideline benefits

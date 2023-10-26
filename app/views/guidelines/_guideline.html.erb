@@ -1,7 +1,25 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title"><%= guideline.title %></h5>
-    <p class="card-text"><%= guideline.description %></p>
-    <a href="#" class="btn btn-primary">See more</a>
-  </div>
+<div class="card <%= card_class(guideline) %>">
+  <details class="card__body">
+    <summary class="card__title">
+      <p><%= guideline.impact.capitalize %> impact 🌿</p>
+      <h2><%= guideline.title %></h2>
+    </summary>
+    <div class="card__text">
+      <p><%= guideline.description %></p>
+      <details class="card__checklist">
+        <summary class="card__checklist__title">Actions checklist</summary>
+        <ul>
+          <% guideline.criteria.each do |criterium| %>
+            <li>
+            <details class="card__checklist__item">
+              <summary><%= criterium.title %></summary>
+              <p><%= criterium.text %></p>
+            </details>
+            </li>
+          <% end %>
+        </ul>
+      </details>
+    </div>
+  </details>
+  <%= guideline_effort(guideline).html_safe%>
 </div>

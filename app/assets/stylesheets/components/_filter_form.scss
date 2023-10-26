@@ -1,0 +1,29 @@
+.filter-form__checkbox {
+  position: absolute;
+  transform: scale(0);
+}
+
+.filter-form__checkbox + label {
+  display: inline-flex;
+  padding: 1rem;
+  color: $primary-dark;
+  cursor: pointer;
+}
+
+.filter-form__checkbox:checked +label, .filter-form__reset-link.active {
+  background-color: $primary-dark;
+  color: $primary-light;
+}
+
+.filter-form__input-group {
+  display: inline-flex;
+  align-items: center;
+
+  background-color: $accent-color-1;
+}
+
+.filter-form__reset-link {
+  padding: 1rem;
+  color: $primary-dark;
+  cursor: pointer;
+}

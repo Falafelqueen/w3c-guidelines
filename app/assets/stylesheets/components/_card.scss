@@ -1,0 +1,81 @@
+.card {
+  min-height: 180px;
+  padding: 1.75rem 1rem;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+
+  .card__body {
+    width: 30ch;
+  }
+}
+
+.card__title {
+  & > * + * {
+    margin-top: .75rem ;
+  }
+
+}
+
+summary.card__title::marker {
+    content: none
+}
+
+.card__text {
+  & > * {
+      margin-top: .75rem;
+  }
+}
+.card--ux-design {
+  background-color: $accent-color-1;
+}
+
+.card--development {
+  background-color: $accent-color-2;
+}
+
+.card--hosting-and-infrastructure {
+  background-color: $accent-color-3;
+}
+
+.card__bottom--right {
+  text-align: end;
+  margin-bottom: 0;
+  margin-top: auto;
+}
+
+.card__checklist {
+  ul {
+    list-style: none;
+  }
+  .card__checklist__title {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
+.card__checklist__item {
+  margin-left: 1rem;
+  margin-top: .5rem;
+  p {
+    opacity: 0.9;
+  }
+}
+
+.card__checklist__item summary::marker{
+  content: none;
+}
+
+.card__checklist__item summary::after {
+  cursor: pointer;
+  content: "▼";
+  font-size: $font-size-xs;
+  margin-left: .5rem;
+}
+
+.card__checklist__item[open] summary::after {
+  cursor: pointer;
+  content: "▲";
+}

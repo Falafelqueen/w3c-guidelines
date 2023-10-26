@@ -1,3 +1,12 @@
-<div class="cards-wrapper">
-  <%= render @guidelines %>
+<div>
+ <%= render 'filter_form' %>
+</div>
+
+<div class="card__container">
+  <% group_size = group_size(@guidelines.length) %>
+  <% @guidelines.in_groups_of(group_size, false) do |guidelines|%>
+    <div class="column">
+      <%= render guidelines %>
+    </div>
+  <% end %>
 </div>
