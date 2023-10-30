@@ -1,6 +1,6 @@
 class GuidelinesController < ApplicationController
   def index
-    @guidelines = Guideline.all.order(impact: :desc)
+    @guidelines = Guideline.order(impact: :desc)
 
     @guidelines = @guidelines.where(impact: params[:impact]) if params[:impact].present?
     @guidelines = @guidelines.where(effort: params[:effort]) if params[:effort].present?

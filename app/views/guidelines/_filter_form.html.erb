@@ -1,25 +1,33 @@
  <%= form_with url: guidelines_path, method: :get, class: 'filter-form' do |f| %>
     <div class="filter-form__input-group">
-      <h3>Impact</h3>
-      <%= link_to 'All', request.parameters.except(:impact), class: "filter-form__reset-link #{'active' unless params[:impact].present? }" %>
+      <%= link_to 'Any 🌿', request.parameters.except(:impact), class: "filter-form__reset-link #{'active' unless params[:impact].present? }" %>
       <%= check_box_tag "impact[]", 'low', params[:impact]&.include?('low'), multiple: true, onchange: 'this.form.submit()', id: 'impact_low', class: 'filter-form__checkbox' %>
-      <%= label_tag 'impact_low','Low' %>
+      <%= label_tag 'impact_low','Low impact 🌿' %>
       <%= check_box_tag "impact[]", 'medium', params[:impact]&.include?('medium'), multiple: true, onchange: 'this.form.submit()', id: 'impact_medium', class: 'filter-form__checkbox' %>
-      <%= label_tag 'impact_medium', 'Medium' %>
+      <%= label_tag 'impact_medium', 'Medium impact 🌿' %>
       <%= check_box_tag "impact[]", 'high', params[:impact]&.include?('high'), multiple: true, onchange: 'this.form.submit()', id: 'impact_high', class: 'filter-form__checkbox' %>
-      <%= label_tag 'impact_high', 'High' %>
+      <%= label_tag 'impact_high', 'High impact 🌿' %>
     </div>
     <div class="filter-form__input-group">
-      <h3>Effort</h3>
-      <%= link_to 'All', request.parameters.except(:effort), class: "filter-form__reset-link #{'active' unless params[:effort].present? }" %>
-      <%= check_box_tag "effort[]", 'low', params[:effort]&.include?('low'), multiple: true, onchange: 'this.form.submit()', id: 'effort_low', class: 'filter-form__checkbox' %>
-      <%= label_tag 'effort_low','Low' %>
-      <%= check_box_tag "effort[]", 'medium', params[:effort]&.include?('medium'), multiple: true, onchange: 'this.form.submit()', id: 'effort_medium', class: 'filter-form__checkbox' %>
-      <%= label_tag 'effort_medium', 'Medium' %>
-      <%= check_box_tag "effort[]", 'high', params[:effort]&.include?('high'), multiple: true, onchange: 'this.form.submit()', id: 'effort_high', class: 'filter-form__checkbox' %>
-      <%= label_tag 'effort_high', 'High' %>
+        <%= link_to 'All', request.parameters.except(:effort), class: "filter-form__reset-link #{'active' unless params[:effort].present? }" %>
+        <%= check_box_tag "effort[]", 'low', params[:effort]&.include?('low'), multiple: true, onchange: 'this.form.submit()', id: 'effort_low', class: 'filter-form__checkbox' %>
+        <%= label_tag 'effort_low','Low effort 🦾' %>
+        <%= check_box_tag "effort[]", 'medium', params[:effort]&.include?('medium'), multiple: true, onchange: 'this.form.submit()', id: 'effort_medium', class: 'filter-form__checkbox' %>
+        <%= label_tag 'effort_medium', 'Medium effort 🦾' %>
+        <%= check_box_tag "effort[]", 'high', params[:effort]&.include?('high'), multiple: true, onchange: 'this.form.submit()', id: 'effort_high', class: 'filter-form__checkbox' %>
+        <%= label_tag 'effort_high', 'High effort 🦾' %>
     </div>
+    <div class="filter-form__input-group">
+      <%= link_to 'All', request.parameters.except(:category), class: "filter-form__reset-link #{'active' unless params[:category].present? }" %>
+      <%= check_box_tag "category[]", 'ux_design', params[:category]&.include?('ux_design'), multiple: true, onchange: 'this.form.submit()', id: 'category_ux_design', class: 'filter-form__checkbox' %>
+      <%= label_tag 'category_ux_design','UX 🧑‍🎨' %>
+      <%= check_box_tag "category[]", 'development', params[:category]&.include?('development'), multiple: true, onchange: 'this.form.submit()', id: 'category_development', class: 'filter-form__checkbox' %>
+      <%= label_tag 'category_development', 'Development 👩‍💻' %>
+      <%= check_box_tag "category[]", 'hosting_and_infrastructure', params[:category]&.include?('hosting_and_infrastructure'), multiple: true, onchange: 'this.form.submit()', id: 'category_hosting_and_infrastructure', class: 'filter-form__checkbox' %>
+      <%= label_tag 'category_hosting_and_infrastructure', 'Hosting & Infrastructure 👷' %>
+    </div>
+
     <%#= select_tag :impact, options_for_select([["Low impact", "low"], ["Medium impact", "medium"], ["High impact", "high"]], params[:impact]),  { onchange: 'this.form.submit()', include_blank: "All"}%>
-    <%= select_tag :category, options_for_select([["UX Design", "ux_design"], ["Development", "development"], ["Hosting and Infrastructure", "hosting_and_infrastructure"]], params[:category]), {onchange: 'this.form.submit()', include_blank: "All"} %>
+    <%#= select_tag :category, options_for_select([["UX Design", "ux_design"], ["Development", "development"], ["Hosting and Infrastructure", "hosting_and_infrastructure"]], params[:category]), {onchange: 'this.form.submit()', include_blank: "All"} %>
     <%#= select_tag :effort, options_for_select([["Low effort", "low"], ["Medium effort", "medium"], ["High effort", "high"]], params[:effort]), {onchange: 'this.form.submit()', include_blank: "All"} %>
   <% end %>

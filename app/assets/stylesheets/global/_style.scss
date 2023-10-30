@@ -1,4 +1,19 @@
+@font-face {
+  font-family: 'Montserrat', 'Helvetica', 'sant-serif';
+  src: url('../fonts/Montserrat.ttf');
+}
+
+@font-face {
+  font-family: 'Nunito', 'Helvetica', 'sant-serif';
+  src: url('../fonts/Nunito.ttf');
+}
+
 body {
   background-color: $primary-light;
   color: $primary-dark;
+  font-family: 'Nunito';
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Montserrat';
 }

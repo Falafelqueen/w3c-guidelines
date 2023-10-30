@@ -6,9 +6,13 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 0.5rem;
-
-  .card__body {
-    width: 30ch;
+  .card-body{
+    width: 100%;
+  }
+  @media(min-width: $larger-phone) {
+    .card__body {
+      width: 30ch;
+    }
   }
 }
 

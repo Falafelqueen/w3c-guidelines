@@ -1,15 +1,23 @@
+.filter-form {
+  display: flex;
+  justify-content: center;
+  gap: $spacer-xs;
+}
+
 .filter-form__checkbox {
   position: absolute;
   transform: scale(0);
 }
 
-.filter-form__checkbox + label {
+.filter-form__checkbox+label,
+.filter-form__reset-link {
   display: inline-flex;
-  padding: 1rem;
+  padding: 0.5rem .25rem;
   color: $primary-dark;
   cursor: pointer;
+  border: 2px solid $primary-dark;
+  border-radius: 1rem;
 }
-
 .filter-form__checkbox:checked +label, .filter-form__reset-link.active {
   background-color: $primary-dark;
   color: $primary-light;
@@ -18,12 +26,16 @@
 .filter-form__input-group {
   display: inline-flex;
   align-items: center;
-
-  background-color: $accent-color-1;
+  padding-inline: $spacer-s;
+  border-radius: 1rem;
+  font-size: 1rem;
+  h3 {
+    margin-right: $spacer-m;
+  }
 }
 
 .filter-form__reset-link {
-  padding: 1rem;
   color: $primary-dark;
   cursor: pointer;
+  text-decoration: none;
 }

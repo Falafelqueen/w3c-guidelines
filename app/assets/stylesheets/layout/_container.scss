@@ -2,13 +2,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: $spacer-m;
-  justify-content: start;
+  justify-content: center;
   margin: 0 auto;
 }
 
 .column {
   display: flex;
   flex-direction: column;
-  flex: 0;
+  flex: 1;
   gap: $spacer-m;
+  @media(min-width: $larger-phone){
+    flex: 0;
+
+  }
 }
