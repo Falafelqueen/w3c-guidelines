@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   gap: $spacer-m;
   justify-content: center;
+  align-items: flex-start;
   margin: 0 auto;
 }
 
@@ -11,8 +12,7 @@
   flex-direction: column;
   flex: 1;
   gap: $spacer-m;
-  @media(min-width: $larger-phone){
+  @media (min-width: $larger-phone) {
     flex: 0;
-
   }
 }

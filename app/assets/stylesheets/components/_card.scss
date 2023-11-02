@@ -6,30 +6,43 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 0.5rem;
-  .card-body{
+  .card-body {
     width: 100%;
   }
-  @media(min-width: $larger-phone) {
+
+  @media (min-width: $larger-phone) {
+    & {
+      padding: 1.25rem 1rem;
+    }
     .card__body {
-      width: 30ch;
+      width: 20ch;
+    }
+  }
+
+  @media (min-width: $desktop) {
+    & {
+      padding: 1.5rem 1rem;
+    }
+
+    .card__body {
+      width: 25ch;
     }
   }
 }
 
 .card__title {
   & > * + * {
-    margin-top: .75rem ;
+    margin-top: 0.75rem;
   }
-
 }
 
 summary.card__title::marker {
-    content: none
+  content: none;
 }
 
 .card__text {
   & > * {
-      margin-top: .75rem;
+    margin-top: 0.75rem;
   }
 }
 .card--ux-design {
@@ -62,13 +75,13 @@ summary.card__title::marker {
 
 .card__checklist__item {
   margin-left: 1rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   p {
     opacity: 0.9;
   }
 }
 
-.card__checklist__item summary::marker{
+.card__checklist__item summary::marker {
   content: none;
 }
 
@@ -76,7 +89,7 @@ summary.card__title::marker {
   cursor: pointer;
   content: "▼";
   font-size: $font-size-xs;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 .card__checklist__item[open] summary::after {

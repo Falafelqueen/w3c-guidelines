@@ -1,0 +1,17 @@
+<%= turbo_stream.replace :guidelines do %>
+  <%= turbo_frame_tag :guidelines do %>
+    <%= render "guidelines", guidelines: @guidelines %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace :dropdown_items do %>
+  <%= turbo_frame_tag :dropdown_items do %>
+    <% items = [
+      "<a href=#{guidelines_path(sort_by: :high_impact)} data-turbo-stream class=#{"active" if params[:sort_by] == "high_impact"}>Impact (high first)</a>",
+      "<a href=#{guidelines_path(sort_by: :low_impact)} data-turbo-stream class=#{"active" if params[:sort_by] == "low_impact"}>Impact (low first)</a>",
+      "<a href=#{guidelines_path(sort_by: :high_effort)} data-turbo-stream class=#{"active" if params[:sort_by] == "high_effort"}>Effort (high first)</a>",
+      "<a href=#{guidelines_path(sort_by: :low_effort)} data-turbo-stream class=#{"active" if params[:sort_by] == "low_effort"}>Effort (low first)</a>"
+    ] %>
+    <%= render "components/dropdown", text: "Sort", items: items %>
+  <% end %>
+<% end %>

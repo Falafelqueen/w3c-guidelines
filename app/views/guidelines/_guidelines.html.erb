@@ -1,0 +1,10 @@
+<div class="card__container">
+  <% group_size = group_size(guidelines.length) %>
+  <% guidelines.in_groups_of(group_size, false) do |grouped_guidelines| %>
+    <div class="column">
+      <% grouped_guidelines.each do |guideline| %>
+        <%= render "guideline", guideline: guideline %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

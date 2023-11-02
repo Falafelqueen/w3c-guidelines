@@ -1,19 +1,24 @@
 @font-face {
-  font-family: 'Montserrat', 'Helvetica', 'sant-serif';
-  src: url('../fonts/Montserrat.ttf');
+  font-family: "Montserrat";
+  src: url(asset-path("Montserrat.ttf"));
 }
 
 @font-face {
-  font-family: 'Nunito', 'Helvetica', 'sant-serif';
-  src: url('../fonts/Nunito.ttf');
+  font-family: "Nunito";
+  src: url(asset-path("Nunito.ttf"));
 }
 
 body {
   background-color: $primary-light;
   color: $primary-dark;
-  font-family: 'Nunito';
+  font-family: "Nunito", "Arial", sans-serif;
 }
 
-h1,h2,h3,h4,h5,h6 {
-  font-family: 'Montserrat';
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
 }
