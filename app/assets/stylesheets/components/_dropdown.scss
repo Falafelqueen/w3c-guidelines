@@ -1,4 +1,4 @@
-$dropdown-font-size: $font-size-s;
+$dropdown-font-size: $font-size;
 
 .dropdown {
   position: relative;
@@ -27,17 +27,18 @@ $dropdown-font-size: $font-size-s;
   $font-color: $primary-dark;
   /* non-visible by default */
   display: none;
-  /* show when clicked */
-  &.display__list-container--active {
-    display: initial;
-  }
-  max-width: 300px;
-  color: rgba($font-color, 0.8);
-  background-color: white;
   /* The offset from top -> font size of the dropdown__btn times 1.5 */
   position: absolute;
   top: calc(#{$dropdown-font-size} * 1.5);
   left: 0;
+  max-width: 300px;
+  /* show when clicked */
+  &.display__list-container--active {
+    display: initial;
+  }
+  text-wrap: nowrap;
+  color: rgba($font-color, 0.8);
+  background-color: white;
   box-shadow: 0 0 5px rgba(10, 10, 10, 0.1);
   padding-block: $spacer-xs;
   border-radius: 4px;

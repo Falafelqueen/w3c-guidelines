@@ -15,3 +15,7 @@
     <%= render "components/dropdown", text: "Sort", items: items %>
   <% end %>
 <% end %>
+
+<%= turbo_stream.replace :applied_filters do %>
+  <%= render "applied_filters" %>
+<% end %>

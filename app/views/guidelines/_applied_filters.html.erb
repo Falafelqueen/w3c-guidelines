@@ -1,0 +1,10 @@
+<%= turbo_frame_tag :applied_filters do %>
+  <% if request.query_parameters.any? %>
+    <div class="applied-filters">
+      <p>Filters</p>
+      <% generate_tag_names(request.query_parameters)&.each do |tag_name| %>
+        <%= render "components/tag", text: tag_name %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

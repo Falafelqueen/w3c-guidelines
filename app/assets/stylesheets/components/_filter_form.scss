@@ -5,17 +5,23 @@
   padding-inline: $spacer-xl;
 }
 
+.filter-form {
+  display: flex;
+  gap: $spacer-xl;
+}
+
 .filter-form__checkbox {
   position: absolute;
   transform: scale(0);
 }
 
-.filter-form__input-container {
+.filter-form__input-container,
+.filter-form__reset-link {
   text-wrap: nowrap;
   display: block;
   position: relative;
   margin-bottom: $spacer-xs;
-  padding-left: $spacer-xl;
+  padding-left: $spacer-xxl;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -26,7 +32,7 @@
 .filter-form__checkmark {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0.5rem;
   height: 20px;
   width: 20px;
   background-color: white;
@@ -42,14 +48,26 @@
 }
 
 /* Show the checkmark when checked */
-.filter-form__input-container input:checked ~ .filter-form__checkmark:after {
+.filter-form__input-container input:checked ~ .filter-form__checkmark:after,
+.filter-form__reset-link.active .filter-form__checkmark:after {
   display: block;
 }
 
+/* Don't show checkmark if any input is checked */
+fieldset:has(input:checked) {
+  .filter-form__reset-link.active .filter-form__checkmark:after {
+    display: none;
+  }
+  .filter-form__reset-link.active .filter-form__checkmark {
+    background-color: white;
+  }
+}
+
 /* Style the checkmark/indicator */
-.filter-form__input-container .filter-form__checkmark:after {
-  left: 5px;
-  top: 4px;
+.filter-form__input-container .filter-form__checkmark:after,
+.filter-form__reset-link.active .filter-form__checkmark:after {
+  left: 6px;
+  top: 2px;
   width: 5px;
   height: 10px;
   border: solid white;
@@ -60,42 +78,10 @@
 }
 
 /* When the checkbox is checked, add a blue background */
-.filter-form__input-container input:checked ~ .filter-form__checkmark {
+.filter-form__input-container input:checked ~ .filter-form__checkmark,
+.filter-form__reset-link.active .filter-form__checkmark {
   background-color: $primary-dark;
 }
-
-/* .filter-form {
-  display: flex;
-  justify-content: center;
-  gap: $spacer-xs;
-} */
-
-/* .filter-form__checkbox + label,
-.filter-form__reset-link {
-  display: inline-flex;
-  color: $primary-dark;
-  cursor: pointer;
-  height: 100%;
-  padding-top: 0.5rem;
-  padding-bottom: 0.3rem;
-  padding-inline: 0.4rem;
-  margin-right: 0.2rem;
-} */
-
-/* .filter-form__checkbox + label,
-.filter-form__reset-link {
-  content: "";
-  height: 10px;
-  width: 10px;
-  border: 1px solid $primary-dark;
-} */
-
-/* .filter-form__checkbox:checked + label::before,
-.filter-form__reset-link.active::before {
-  background-color: $primary-dark;
-  color: $primary-light;
-}
- */
 
 .filter-form__input-group {
   display: inline-flex;
@@ -113,4 +99,22 @@
   color: $primary-dark;
   cursor: pointer;
   text-decoration: none;
+}
+
+/*  Applied filters */
+
+.applied-filters {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacer-s;
+  padding-inline: $spacer-xl;
+  padding-block: $spacer-s;
+  gap: $spacer-xs;
+  /*  border-radius: 0 0 8px 8px; */
+  /*   background-color: rgba($accent-color-2-pure, 0.1); */
+
+  p {
+    padding-right: $spacer-xs;
+    border-right: 1px solid rgba($accent-color-2-pure, 0.3);
+  }
 }

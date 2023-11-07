@@ -1,0 +1,9 @@
+.tag {
+  display: inline-block;
+  padding: $spacer-xxs $spacer-s;
+  background-color: rgba($accent-color-2-pure, 0.2);
+  color: $primary-dark;
+  border: 2px solid $accent-color-2;
+  border-radius: 0.5rem;
+  font-size: $font-size-xs;
+}

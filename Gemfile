@@ -34,14 +34,14 @@ gem 'redis'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  # Open the console in the browser when running raise
-  gem 'web-console'
-  gem 'erb-formatter'
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+    # Open the console in the browser when running raise
+  gem 'web-console'
+   gem 'erb-formatter'
 end
 
 gem "importmap-rails", "~> 1.2"
