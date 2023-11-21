@@ -2,12 +2,12 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: $spacer-s;
-  padding-inline: $spacer-xl;
+  padding-inline: $spacer-xxl;
 }
 
 .filter-form {
   display: flex;
-  gap: $spacer-xl;
+  gap: $spacer-xxl;
 }
 
 .filter-form__checkbox {
@@ -21,7 +21,7 @@
   display: block;
   position: relative;
   margin-bottom: $spacer-xs;
-  padding-left: $spacer-xxl;
+  padding-left: $spacer-xxxl;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -107,7 +107,7 @@ fieldset:has(input:checked) {
   display: flex;
   align-items: center;
   margin-bottom: $spacer-s;
-  padding-inline: $spacer-xl;
+  padding-inline: $spacer-xxl;
   padding-block: $spacer-s;
   gap: $spacer-xs;
   /*  border-radius: 0 0 8px 8px; */

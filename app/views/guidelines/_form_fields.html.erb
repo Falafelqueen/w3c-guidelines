@@ -35,10 +35,11 @@
       </g>
     </svg>
   </button>
+
   <div class="dropdown__list-container" data-dropdown-target="list">
     <ul class="dropdown__list dropdown__list-checkboxes">
       <fieldset>
-        <%= link_to request.parameters.except(:impact),
+        <%= link_to request.query_parameters.except(:impact),
           class: "filter-form__reset-link #{"active" unless params[:impact].present?}"  do %>
           All 🌿
           <span class="filter-form__checkmark"></span>
@@ -139,7 +140,7 @@
           Low effort
           <%= check_box_tag "effort[]",
           "low",
-          params[:impact]&.include?("low"),
+          params[:effort]&.include?("low"),
           multiple: true,
           onchange: "this.form.requestSubmit()",
           id: "effort_low",
@@ -222,7 +223,7 @@
   <div class="dropdown__list-container" data-dropdown-target="list">
     <ul class="dropdown__list dropdown__list-checkboxes">
       <fieldset>
-        <%= link_to request.parameters.except(:category),
+        <%= link_to request.query_parameters.except(:category),
         class: "filter-form__reset-link #{"active" unless params[:category].present?}" do %>
           All categories
           <span class="filter-form__checkmark"></span>

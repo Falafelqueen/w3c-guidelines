@@ -1,0 +1,34 @@
+<div data-controller="newsletter" class="newsletter__container">
+  <h2 data-newsletter-target="thankYouMessage" style="display:none;">Thank you for subscribing to the Zhiva.tech Newsletter!</h2>
+  <%= form_with url: 'https://api.convertkit.com', data: { action:'keydown.enter->newsletter#subscribe click->newsletter#subscribe', newsletter_target: 'form' }, class:'sign-up' do |f| %>
+    <h2 style="margin-top:0;">Subscribe zhiva.tech newsletter</h2>
+    <ul>
+      <li>
+        <div class="coffee-icon"></div>
+        ☕️ Monthly resources and news, to read with a coffee
+      </li>
+      <li>
+        <div class="newsletter-icon"></div>
+        💌 Directly in your inbox
+      </li>
+      <li>
+        <div class="bolt-icon"></div>
+        👩🏼‍💻 Free, simple and curated by web developers
+      </li>
+    </ul>
+    <div class="form-flex">
+      <div>
+        <%= f.label :email, class: "visually-hidden" %>
+        <%= f.text_field :email,
+                     data: {
+                       newsletter_target: "emailInput"
+                     },
+                     class: "input",
+                     placeholder: "Type your email" %>
+      </div>
+      <%= f.submit "Subscribe", class: "btn btn-primary" %>
+
+    </div>
+    <p>We respect your privacy. Unsubscribe at any time.</p>
+  <% end %>
+</div>

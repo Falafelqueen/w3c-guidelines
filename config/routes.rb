@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'pages/test'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :guidelines, only: [:index]
 
   get "components", to: "pages#test"
+  get "about", to: "pages#about"
 end

@@ -19,8 +19,9 @@ $spacer-xs: 0.5rem;
 $spacer-s: 1rem;
 $spacer-m: 1.25rem;
 $spacer-l: 1.5rem;
-$spacer-xl: 2rem;
-$spacer-xxl: 2.5rem;
+$spacer-xl: 1.75rem;
+$spacer-xxl: 2rem;
+$spacer-xxxl: 2.5rem;
 
 $line-height-m: 1.25rem;
 
@@ -29,7 +30,10 @@ $font-size-s: 0.875rem;
 $font-size: 1rem;
 
 $larger-phone: 376px;
+$tablet: 690px;
 $desktop: 1080px;
 
 $font-weight-bolder: 600;
 $font-weight-bold: 800;
+
+$rounded-s: 0.5rem;

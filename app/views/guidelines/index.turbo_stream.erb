@@ -1,6 +1,7 @@
 <%= turbo_stream.replace :guidelines do %>
   <%= turbo_frame_tag :guidelines do %>
     <%= render "guidelines", guidelines: @guidelines %>
+    <%== pagy_nav(@pagy) %>
   <% end %>
 <% end %>
 
@@ -18,4 +19,8 @@
 
 <%= turbo_stream.replace :applied_filters do %>
   <%= render "applied_filters" %>
+<% end %>
+
+<%= turbo_stream.replace :filter_form do %>
+  <%= render "filter_form" %>
 <% end %>

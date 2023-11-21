@@ -1,8 +1,8 @@
 <%= turbo_frame_tag :applied_filters do %>
-  <% if request.query_parameters.any? %>
+  <% if applied_filters = request.query_parameters.presence && request.query_parameters.reject {|key,value| key.in?(['page','sort_by'])}.presence %>
     <div class="applied-filters">
       <p>Filters</p>
-      <% generate_tag_names(request.query_parameters)&.each do |tag_name| %>
+      <% generate_tag_names(applied_filters)&.each do |tag_name| %>
         <%= render "components/tag", text: tag_name %>
       <% end %>
     </div>

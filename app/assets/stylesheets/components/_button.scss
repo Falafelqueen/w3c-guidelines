@@ -1,0 +1,17 @@
+.btn {
+  padding: $spacer-xs $spacer-s;
+  display: inline-block;
+  border-radius: $rounded-s;
+  border: none;
+  font-size: $font-size;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  &.btn-primary {
+    background-color: $accent-color-2-pure;
+    color: $primary-light;
+    &:hover {
+      background-color: $accent-color-2;
+    }
+  }
+}

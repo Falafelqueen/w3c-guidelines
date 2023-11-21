@@ -1,10 +1,14 @@
 class GuidelinesController < ApplicationController
+  include Pagy::Backend
+
   def index
-    @guidelines = Guideline.includes(:criteria).order(impact: :desc)
+    @guidelines = Guideline.includes(:criteria)
 
     @guidelines = @guidelines.where(impact: params[:impact]) if params[:impact].present?
     @guidelines = @guidelines.where(effort: params[:effort]) if params[:effort].present?
     @guidelines = @guidelines.where(category: params[:category]) if params[:category].present?
+
+    puts request.parameters
 
     if params[:sort_by]
       @guidelines = case params[:sort_by]
@@ -19,6 +23,7 @@ class GuidelinesController < ApplicationController
       end
     end
 
+    @pagy, @guidelines = pagy(@guidelines, items: 20)
     respond_to do |f|
       f.html
       f.turbo_stream

@@ -20,8 +20,8 @@ module GuidelinesHelper
       1
     elsif guidelines_count < 10
       2
-    elsif guidelines_count < 20
-      4
+    elsif guidelines_count <= 20
+      5
     elsif guidelines_count < 40
       10
     elsif guidelines_count < 60

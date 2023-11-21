@@ -12,6 +12,10 @@ body {
   background-color: $primary-light;
   color: $primary-dark;
   font-family: "Nunito", "Arial", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 h1,
@@ -21,4 +25,26 @@ h4,
 h5,
 h6 {
   font-family: "Montserrat", sans-serif;
+}
+
+.visually-hidden {
+  height: 0;
+  opacity: 0;
+}
+
+.bg-dark {
+  background-color: $primary-dark;
+  color: $primary-light;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fadded {
+  opacity: 0.7;
+}
+
+.unstyled-list {
+  list-style: none;
 }

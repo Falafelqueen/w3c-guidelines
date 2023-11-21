@@ -1,4 +1,4 @@
 <%= form_with url: guidelines_path, method: :get,
-         class: 'filter-form', data: {turbo_stream: '', turbo_frame: :applied_filters} do |f| %>
+         class: 'filter-form', data: {turbo_stream: '', turbo_frame: :applied_filters}, id: :filter_form do |f| %>
   <%= render "form_fields" %>
 <% end %>

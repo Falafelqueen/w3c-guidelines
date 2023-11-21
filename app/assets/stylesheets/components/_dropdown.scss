@@ -32,6 +32,7 @@ $dropdown-font-size: $font-size;
   top: calc(#{$dropdown-font-size} * 1.5);
   left: 0;
   max-width: 300px;
+  min-width: 180px;
   /* show when clicked */
   &.display__list-container--active {
     display: initial;
@@ -49,7 +50,7 @@ $dropdown-font-size: $font-size;
 
   li {
     padding-block: $spacer-xs;
-    padding-inline: $spacer-xs $spacer-xxl;
+    padding-inline: $spacer-xs $spacer-xxxl;
   }
 
   li:hover {
