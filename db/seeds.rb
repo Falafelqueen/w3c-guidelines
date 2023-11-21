@@ -24,11 +24,13 @@ doc.search('#user-experience-design section').each do |section|
   guideline = guideline_raw && guideline_raw.split('-').join(' ').capitalize
 
   if guideline
-  # get the guideline title
+    # get the guideline title
     g = Guideline.new(title: guideline)
 
-    # get the guideline description
+    # add link
+    g.link_url = "#{url}/##{section.attribute('id').value}"
 
+    # get the guideline description
     g.description = section.search('.header-wrapper + p').first.text
 
     section.search('.benefits li').each do |li|
@@ -75,6 +77,8 @@ puts "--------------------------------------------------------------"
 puts "Creating Web dev guidelines..."
 puts "--------------------------------------------------------------"
 
+
+
 doc.search('#web-development section').each do |section|
   guideline_raw = section.attribute('id') && section.attribute('id').value
   guideline = guideline_raw && guideline_raw.split('-').join(' ').capitalize
@@ -82,7 +86,7 @@ doc.search('#web-development section').each do |section|
   if guideline
   # get the guideline title
     g = Guideline.new(title: guideline)
-
+    g.link_url = "#{url}/##{section.attribute('id').value}"
     # get the guideline description
 
     g.description = section.search('.header-wrapper + p').first.text
@@ -137,6 +141,9 @@ doc.search('#hosting-infrastructure-and-systems section').each do |section|
   # get the guideline title
     g = Guideline.new(title: guideline)
 
+    # add link
+
+    g.link_url = "#{url}/##{section.attribute('id').value}"
     # get the guideline description
 
     g.description = section.search('.header-wrapper + p').first.text

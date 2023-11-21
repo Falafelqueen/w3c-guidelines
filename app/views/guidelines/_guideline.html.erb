@@ -1,7 +1,8 @@
 <div class="card <%= card_class(guideline) %>">
   <details class="card__body">
     <summary class="card__title">
-      <p><%= guideline.impact.capitalize %> impact 🌿</p>
+      <p><%= guideline.impact.capitalize %>
+        impact 🌿</p>
       <h2><%= guideline.title %></h2>
     </summary>
     <div class="card__text">
@@ -11,15 +12,21 @@
         <ul>
           <% guideline.criteria.each do |criterium| %>
             <li>
-            <details class="card__checklist__item">
-              <summary><%= criterium.title %></summary>
-              <p><%= criterium.text %></p>
-            </details>
+              <details class="card__checklist__item">
+                <summary><%= criterium.title %></summary>
+                <p><%= criterium.text %></p>
+              </details>
             </li>
           <% end %>
         </ul>
       </details>
+      <%= link_to guideline.link_url,
+      target: "_blank",
+      title: "Opens W3C page" do %>
+        ☞
+        <span class="link-underline text-bold">See on W3C</span>
+      <% end %>
     </div>
   </details>
-  <%= guideline_effort(guideline).html_safe%>
+  <%= guideline_effort(guideline).html_safe %>
 </div>

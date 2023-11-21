@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: w3c_guidelines_production
-  username: w3c_guidelines
+  username: <%= ENV["DATABASE_USERNAME"] %>
   password: <%= ENV["W3C_GUIDELINES_DATABASE_PASSWORD"] %>

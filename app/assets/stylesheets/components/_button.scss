@@ -7,11 +7,23 @@
   font-weight: $font-weight-bold;
   cursor: pointer;
   transition: 0.2s ease-in;
+  &.btn-s {
+    padding: $spacer-xxs $spacer-xs;
+  }
+
   &.btn-primary {
     background-color: $accent-color-2-pure;
     color: $primary-light;
     &:hover {
       background-color: $accent-color-2;
+    }
+  }
+
+  &.btn-dark {
+    background-color: $primary-dark;
+    color: $primary-light;
+    &:hover {
+      background-color: rgba($primary-dark, 0.7);
     }
   }
 }
