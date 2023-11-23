@@ -8,9 +8,3 @@
     </div>
   <% end %>
 </div>
-<ul></ul>
-<% availabilities.keys.each_cons(2) do |prev,day| %>
-  <% day_array = key.split("_") %>
-  <span><%= "#{day_array[0].capitalize}  #{day_array[1] == "am" ? "morning" : "afternoon"}" %></span>
-<% end %>
-<%#=  %>
