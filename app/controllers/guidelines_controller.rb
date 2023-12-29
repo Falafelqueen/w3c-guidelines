@@ -8,8 +8,6 @@ class GuidelinesController < ApplicationController
     @guidelines = @guidelines.where(effort: params[:effort]) if params[:effort].present?
     @guidelines = @guidelines.where(category: params[:category]) if params[:category].present?
 
-    puts request.parameters
-
     if params[:sort_by]
       @guidelines = case params[:sort_by]
       when 'low_effort'
