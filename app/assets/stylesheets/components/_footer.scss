@@ -1,3 +1,8 @@
 footer {
   padding-block: $spacer-m;
 }
+
+.footer__links {
+  /* To prevent container growth on :hover because of {font-weight: bold} */
+  min-width: 150px;
+}

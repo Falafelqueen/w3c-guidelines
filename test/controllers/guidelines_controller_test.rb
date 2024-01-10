@@ -13,5 +13,4 @@ class GuidelinesControllerTest < ActionDispatch::IntegrationTest
     assert_includes assigns(:guidelines),  @guideline_high_impact
     refute_includes assigns(:guidelines),  @guideline_low_impact
   end
-
 end

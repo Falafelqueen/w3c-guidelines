@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   resources :guidelines, only: [:index]
 
-  get "components", to: "pages#test"
+  get "components", to: "pages#test", as: "test"
   get "about", to: "pages#about"
 end
