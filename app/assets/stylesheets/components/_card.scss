@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 0.5rem;
+  cursor: pointer;
   .card-body {
     width: 100%;
   }
@@ -96,4 +97,3 @@ summary.card__title::marker {
   cursor: pointer;
   content: "▲";
 }
-
