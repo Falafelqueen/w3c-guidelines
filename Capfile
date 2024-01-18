@@ -36,16 +36,7 @@ install_plugin Capistrano::SCM::Git
  require "capistrano/rails"
 set :rbenv_type, :user
 set :rbenv_ruby, '3.3.0'
-set :application, "w3c-guidelines"
-set :repo_url, "git@github.com:Falafelqueen/w3c-guidelines.git"
 
-# Deploy to the user's home directory
-set :deploy_to, "/home/deploy/#{fetch :application}"
-
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
-
-# Only keep the last 5 releases to save disk space
-set :keep_releases, 5
 
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
