@@ -19,6 +19,9 @@ gem "puma", "~> 5.0"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Use Sass to process CSS
+
+# Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
+gem "jsbundling-rails"
 gem "sassc-rails"
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
@@ -55,4 +58,4 @@ group :development do
    gem 'erb-formatter'
 end
 
-gem "importmap-rails", "~> 1.2"
+#gem "importmap-rails", "~> 1.2"
