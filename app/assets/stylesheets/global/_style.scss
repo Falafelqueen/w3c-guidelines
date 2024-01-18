@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Montserrat";
-  src: url(asset-path("Montserrat.ttf"));
+  src: url("Montserrat.ttf");
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url(asset-path("Nunito.ttf"));
+  src: url("Nunito.ttf");
 }
 
 body {
@@ -52,4 +52,3 @@ h6 {
 .unstyled-list {
   list-style: none;
 }
-

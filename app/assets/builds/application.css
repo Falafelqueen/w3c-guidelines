@@ -24,11 +24,11 @@ fieldset {
 
 @font-face {
   font-family: "Montserrat";
-  src: url(asset-path("Montserrat.ttf"));
+  src: font-url("Montserrat.ttf");
 }
 @font-face {
   font-family: "Nunito";
-  src: url(asset-path("Nunito.ttf"));
+  src: font-url("Nunito.ttf");
 }
 body {
   background-color: white;
