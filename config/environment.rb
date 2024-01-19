@@ -5,3 +5,6 @@ require_relative "application"
 Rails.application.config.hosts << "lucias.work"
 
 Rails.application.initialize!
+
+# trying to fix action dispatch error digital ocean
+Rails.application.config.hosts.clear

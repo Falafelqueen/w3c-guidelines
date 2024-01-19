@@ -73,6 +73,9 @@ Rails.application.configure do
   end
 
   config.hosts << "lucias.work"
+  # trying to fix action dispatch error digital ocean
+  config.hosts << "188.166.108.67"
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
