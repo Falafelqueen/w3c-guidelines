@@ -72,9 +72,11 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  config.hosts << "lucias.work"
+  #config.hosts << "lucias.work"
   # trying to fix action dispatch error digital ocean
   config.hosts << "188.166.108.67"
+  config.hosts << "websustainabilityguidelines.com"
+  config.hosts << "www.websustainabilityguidelines.com"
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

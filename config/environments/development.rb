@@ -61,8 +61,10 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  config.hosts << "lucias.work"
+  # config.hosts << "lucias.work"
   # trying to fix action dispatch error digital ocean
   config.hosts << "188.166.108.67"
+  config.hosts << "websustainabilityguidelines.com"
+  config.hosts << "www.websustainabilityguidelines.com"
 
 end
