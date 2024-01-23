@@ -64,6 +64,7 @@ Rails.application.configure do
   # config.hosts << "lucias.work"
   # trying to fix action dispatch error digital ocean
   config.hosts << "188.166.108.67"
+  config.hosts << "188.166.108.67"
   config.hosts << "websustainabilityguidelines.com"
   config.hosts << "www.websustainabilityguidelines.com"
 
