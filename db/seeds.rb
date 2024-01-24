@@ -65,6 +65,8 @@ doc.search('#user-experience-design section').each do |section|
         Criterium.create!(title: criteria, text: text, guideline: g)
       end
     end
+
+    # setting category (enum field) [ux_desing, development, hosting_and_infrastructure, business_and_management]
     g.category = 0
     g.save!
 
@@ -123,15 +125,18 @@ doc.search('#web-development section').each do |section|
         Criterium.create!(title: criteria, text: text, guideline: g)
       end
     end
+
+    # setting category (enum field) [ux_desing, development, hosting_and_infrastructure, business_and_management]
     g.category = 1
     g.save!
 
     puts "Created #{g.title}"
   end
 end
-puts "--------------------------------------------------------------"
-puts "Creating hosting infrastructure and systems guidelines..."
-puts "--------------------------------------------------------------"
+
+  puts "--------------------------------------------------------------"
+  puts "Creating hosting infrastructure and systems guidelines..."
+  puts "--------------------------------------------------------------"
 
 doc.search('#hosting-infrastructure-and-systems section').each do |section|
   guideline_raw = section.attribute('id') && section.attribute('id').value
@@ -145,7 +150,64 @@ doc.search('#hosting-infrastructure-and-systems section').each do |section|
 
     g.link_url = "#{url}/##{section.attribute('id').value}"
     # get the guideline description
+    g.description = section.search('.header-wrapper + p').first.text
 
+    section.search('.benefits li').each do |li|
+      # get the guideline benefits
+      benefit_text = li.text.split(':')[1..-1].join(':').strip
+      benefit_category = li.search('strong').text.split(':').first
+      Benefit.create(text: benefit_text, category: benefit_category, guideline_id: g.id)
+    end
+
+    # get the guideline effort and impact
+    # impact
+    impact =  section.search('.rating dd').first&.text
+    g.impact = case impact
+                when "Low" then 0
+                when "Medium" then 1
+                when "High" then 2
+                end
+    # effort
+    effort = section.search('.rating dd')[1]&.text
+    g.effort = case effort
+              when "Low" then 0
+              when "Medium" then 1
+              when "High" then 2
+              end
+    # get the criteria title and descriptions
+    section.search('.notoc').each do |notoc|
+      criteria_raw = notoc.search('[id^="success-criterion"]').present? && notoc.search('[id^="success-criterion"]').text.split('-')[1..-1].join('-').strip
+      if criteria_raw.present?
+        criteria = criteria_raw
+        text = notoc.search('p').text
+
+        Criterium.create!(title: criteria, text: text, guideline: g)
+      end
+    end
+
+    # setting category (enum field) [ux_desing, development, hosting_and_infrastructure, business_and_management]
+    g.category = 2
+    g.save!
+
+    puts "Created #{g.title}"
+  end
+end
+puts "--------------------------------------------------------------"
+puts "Creating business strategy and product management guidelines..."
+puts "--------------------------------------------------------------"
+
+doc.search('#business-strategy-and-product-management section').each do |section|
+  guideline_raw = section.attribute('id') && section.attribute('id').value
+  guideline = guideline_raw && guideline_raw.split('-').join(' ').capitalize
+
+  if guideline
+    # get the guideline title
+    g = Guideline.new(title: guideline)
+
+    # add link
+    g.link_url = "#{url}/##{section.attribute('id').value}"
+
+    # get the guideline description
     g.description = section.search('.header-wrapper + p').first.text
 
     section.search('.benefits li').each do |li|
@@ -166,10 +228,10 @@ doc.search('#hosting-infrastructure-and-systems section').each do |section|
     # effort
     effort = section.search('.rating dd')[1]&.text
     g.effort = case effort
-              when "Low" then 0
-              when "Medium" then 1
-              when "High" then 2
-              end
+                when "Low" then 0
+                when "Medium" then 1
+                when "High" then 2
+                end
     # get the criteria title and descriptions
     section.search('.notoc').each do |notoc|
       criteria_raw = notoc.search('[id^="success-criterion"]').present? && notoc.search('[id^="success-criterion"]').text.split('-')[1..-1].join('-').strip
@@ -180,7 +242,10 @@ doc.search('#hosting-infrastructure-and-systems section').each do |section|
         Criterium.create!(title: criteria, text: text, guideline: g)
       end
     end
-    g.category = 2
+
+
+    # setting category (enum field) [ux_desing, development, hosting_and_infrastructure, business_and_management]
+    g.category = 3
     g.save!
 
     puts "Created #{g.title}"

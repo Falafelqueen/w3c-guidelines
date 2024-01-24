@@ -58,6 +58,11 @@ summary.card__title::marker {
   background-color: $accent-color-3;
 }
 
+.card--business-and-management {
+  background-color: $primary-dark;
+  color: $primary-light;
+}
+
 .card__bottom--right {
   text-align: end;
   margin-bottom: 0;

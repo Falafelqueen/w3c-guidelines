@@ -24,11 +24,11 @@ fieldset {
 
 @font-face {
   font-family: "Montserrat";
-  src: font-url("Montserrat.ttf");
+  src: url("Montserrat.ttf");
 }
 @font-face {
   font-family: "Nunito";
-  src: font-url("Nunito.ttf");
+  src: url("Nunito.ttf");
 }
 body {
   background-color: white;
@@ -365,6 +365,11 @@ summary.card__title::marker {
 
 .card--hosting-and-infrastructure {
   background-color: rgba(255, 234, 236, 0.7);
+}
+
+.card--business-and-management {
+  background-color: #4c3957;
+  color: white;
 }
 
 .card__bottom--right {

@@ -4,6 +4,7 @@ module GuidelinesHelper
     when 'ux_design' then "card--ux-design"
     when 'development' then "card--development"
     when 'hosting_and_infrastructure' then "card--hosting-and-infrastructure"
+    when 'business_and_management' then "card--business-and-management"
     end
   end
 
