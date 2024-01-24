@@ -3114,10 +3114,19 @@
     }
   };
 
+  // app/javascript/controllers/device_log_controller.js
+  var device_log_controller_default = class extends Controller {
+    connect() {
+      document.cookie = `device=${window.innerWidth}`;
+      console.log("device", window.innerWidth);
+    }
+  };
+
   // app/javascript/controllers/index.js
   application.register("dropdown", dropdown_controller_default);
   application.register("newsletter", newsletter_controller_default);
   application.register("hello", hello_controller_default);
+  application.register("device-log", device_log_controller_default);
 
   // node_modules/@hotwired/turbo/dist/turbo.es2017-esm.js
   (function() {

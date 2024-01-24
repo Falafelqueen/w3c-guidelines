@@ -11,3 +11,5 @@ import NewsletterController from "./newsletter_controller";
 application.register("newsletter", NewsletterController);
 import HelloController from "./hello_controller";
 application.register("hello", HelloController);
+import DeviceLogController from "./device_log_controller";
+application.register("device-log", DeviceLogController);

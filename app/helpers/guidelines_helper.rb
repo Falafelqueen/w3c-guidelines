@@ -16,15 +16,23 @@ module GuidelinesHelper
     end
   end
 
+
   def group_size(guidelines_count)
+    # receives a number and returns a group size that is used for deciding the n of columns
     if guidelines_count < 5
       1
     elsif guidelines_count < 10
       2
+    elsif guidelines_count <= 15
+      4
     elsif guidelines_count <= 20
       5
+    elsif guidelines_count < 30
+      7
     elsif guidelines_count < 40
-      10
+      9
+    elsif guidelines_count < 50
+      12
     elsif guidelines_count < 60
       15
     else

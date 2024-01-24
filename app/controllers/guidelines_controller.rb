@@ -21,10 +21,31 @@ class GuidelinesController < ApplicationController
       end
     end
 
-    @pagy, @guidelines = pagy(@guidelines, items: 20)
+    puts "-----------"
+    puts "user agent"
+    pp cookies[:device]
+    puts "-----------"
+
+    @pagy, @guidelines = pagy(@guidelines, items: set_items_count_by_device_width)
+
     respond_to do |f|
       f.html
       f.turbo_stream
+    end
+  end
+
+  private
+
+  def set_items_count_by_device_width
+    count = cookies[:device].to_i
+    if count >= 1080
+      20
+    elsif count > 900
+      16
+    elsif count > 700
+      12
+    else
+      8
     end
   end
 end
