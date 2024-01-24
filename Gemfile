@@ -23,9 +23,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
 
-
 gem "sassc-rails"
-
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
@@ -45,8 +43,6 @@ gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
-gem 'bcrypt_pbkdf'
-gem 'ed25519'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -63,4 +59,6 @@ end
 
 #gem "importmap-rails", "~> 1.2"
 
+gem 'bcrypt_pbkdf'
+gem 'ed25519'
 gem 'bigdecimal'
