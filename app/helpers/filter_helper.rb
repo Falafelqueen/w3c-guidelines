@@ -26,11 +26,9 @@ module FilterHelper
         'Development 👩‍💻'
       when 'hosting_and_infrastructure'
         'Hosting & Infrastructure 👷'
+      when 'business_and_management'
+        'Business & Management 👩‍💼'
       end
     end
   end
 end
-
-
-
-

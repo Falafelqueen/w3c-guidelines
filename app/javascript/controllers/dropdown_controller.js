@@ -8,6 +8,8 @@ export default class extends Controller {
   toggleOpen(event) {
     event.preventDefault();
     const ariaValue = event.target.getAttribute("aria-expanded") == "true";
+    const cardContainer = document.querySelector(".card__container");
+
     event.target.setAttribute("aria-expanded", !ariaValue);
     /* toggle class */
     console.log(
@@ -15,6 +17,21 @@ export default class extends Controller {
       this.listTarget.classList
     );
     this.listTarget.classList.toggle("display__list-container--active");
+
+    const appliedFilters = document.querySelector(".applied-filters");
+    if (this.listTarget.classList.contains("display__list-container--active")) {
+      const extraMargin = this.listTarget.offsetHeight;
+      if (appliedFilters) {
+        appliedFilters.style.marginTop = `${extraMargin}px`;
+      } else {
+        cardContainer.style.marginTop = `${extraMargin}px`;
+      }
+    } else {
+      if (appliedFilters) {
+        appliedFilters.style.marginTop = "initial";
+      }
+      cardContainer.style.marginTop = "initial";
+    }
     console.log(
       "after: showing classlist from toggleOpen",
       this.listTarget.classList

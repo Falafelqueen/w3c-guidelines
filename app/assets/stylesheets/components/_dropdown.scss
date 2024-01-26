@@ -1,7 +1,9 @@
 $dropdown-font-size: $font-size;
-
-.dropdown {
+/* on mobile the wrapper should have position relative */
+.wrapper {
   position: relative;
+}
+.dropdown {
   font-size: $dropdown-font-size;
 }
 
@@ -31,8 +33,8 @@ $dropdown-font-size: $font-size;
   position: absolute;
   top: calc(#{$dropdown-font-size} * 1.5);
   left: 0;
-  max-width: 300px;
-  min-width: 180px;
+  width: 100%;
+  margin-top: 1rem;
   /* show when clicked */
   &.display__list-container--active {
     display: initial;
@@ -40,7 +42,6 @@ $dropdown-font-size: $font-size;
   text-wrap: nowrap;
   color: rgba($font-color, 0.8);
   background-color: white;
-  box-shadow: 0 0 5px rgba(10, 10, 10, 0.1);
   padding-block: $spacer-xs;
   border-radius: 4px;
 
@@ -67,5 +68,77 @@ $dropdown-font-size: $font-size;
 .dropdown__list-checkboxes {
   label {
     display: block;
+  }
+}
+
+@media (min-width: $larger-phone) {
+  .dropdown {
+    position: relative;
+    font-size: $dropdown-font-size;
+  }
+
+  .dropdown__btn {
+    font-size: $dropdown-font-size;
+    color: rgba($primary-dark, 0.85);
+    path {
+      fill: rgba($primary-dark, 0.6);
+    }
+    svg {
+      margin-left: $spacer-xs;
+    }
+  }
+
+  .dropdown__btn:hover {
+    color: $primary-dark;
+    path {
+      fill: rgba($primary-dark, 0.8);
+    }
+  }
+
+  .dropdown__list-container {
+    $font-color: $primary-dark;
+    /* non-visible by default */
+    display: none;
+    /* The offset from top -> font size of the dropdown__btn times 1.5 */
+    position: absolute;
+    top: calc(#{$dropdown-font-size} * 1.5);
+    right: 0;
+    max-width: 300px;
+    min-width: 180px;
+    /* show when clicked */
+    &.display__list-container--active {
+      display: initial;
+    }
+    text-wrap: nowrap;
+    color: rgba($font-color, 0.8);
+    background-color: white;
+    box-shadow: 0 0 5px rgba(10, 10, 10, 0.1);
+    padding-block: $spacer-xs;
+    border-radius: 4px;
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      padding-block: $spacer-xs;
+      padding-inline: $spacer-xs $spacer-xxxl;
+    }
+
+    li:hover {
+      color: $font-color;
+      background-color: rgba($accent-color-2-pure, 0.5);
+    }
+
+    li:has(input[type="checkbox"]:checked),
+    li:has(a.active) {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .dropdown__list-checkboxes {
+    label {
+      display: block;
+    }
   }
 }
