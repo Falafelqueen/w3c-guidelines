@@ -54,7 +54,10 @@ group :development do
   # gem "spring"
     # Open the console in the browser when running raise
   gem 'web-console'
-   gem 'erb-formatter'
+  gem 'erb-formatter'
+  # Find N+1 queries to speed up the app
+  # https://github.com/flyerhzm/bullet
+  gem 'bullet'
 end
 
 #gem "importmap-rails", "~> 1.2"

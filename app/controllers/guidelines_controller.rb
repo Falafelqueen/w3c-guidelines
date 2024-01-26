@@ -21,11 +21,6 @@ class GuidelinesController < ApplicationController
       end
     end
 
-    puts "-----------"
-    puts "user agent"
-    pp cookies[:device]
-    puts "-----------"
-
     @pagy, @guidelines = pagy(@guidelines, items: set_items_count_by_device_width)
 
     respond_to do |f|
