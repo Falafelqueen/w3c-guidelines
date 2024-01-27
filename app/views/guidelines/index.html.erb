@@ -5,9 +5,12 @@
         "<a href=#{guidelines_path(sort_by: :high_impact, effort: params[:effort], impact: params[:impact], category: params[:category])} data-turbo-stream class=#{"active" if params[:sort_by] == "high_impact"}>Impact (high first)</a>",
         "<a href=#{guidelines_path(sort_by: :low_impact, effort: params[:effort], impact: params[:impact], category: params[:category])} data-turbo-stream class=#{"active" if params[:sort_by] == "low_impact"}>Impact (low first)</a>",
         "<a href=#{guidelines_path(sort_by: :high_effort, effort: params[:effort], impact: params[:impact], category: params[:category])} data-turbo-stream class=#{"active" if params[:sort_by] == "high_effort"}>Effort (high first)</a>",
-        "<a href=#{guidelines_path(sort_by: :low_effort, effort: params[:effort], impact: params[:impact], category: params[:category])} data-turbo-stream class=#{"active" if params[:sort_by] == "low_effort"}>Effort (low first)</a>"
+        "<a href=#{guidelines_path(sort_by: :low_effort, effort: params[:effort], impact: params[:impact], category: params[:category])} data-turbo-stream class=#{"active" if params[:sort_by] == "low_effort"}>Effort (low first)</a>",
       ] %>
-      <%= render "components/dropdown", text: "Sort", items: items %>
+      <%= render "components/dropdown",
+      text: "Sort",
+      items: items,
+      list_container_class: "dropdown__list-container-left" %>
     <% end %>
     <%= render "filter_form" %>
   </div>

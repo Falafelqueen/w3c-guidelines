@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: $spacer-s;
-  padding-inline: $spacer-xxl;
 }
 
 .filter-form {
@@ -106,14 +105,15 @@ fieldset:has(input:checked) {
 .applied-filters {
   display: flex;
   align-items: center;
-  margin-bottom: $spacer-s;
-  padding-inline: $spacer-xxl;
+  padding-inline: $spacer-xs;
   padding-block: $spacer-s;
   gap: $spacer-xs;
   flex-wrap: wrap;
   /*  border-radius: 0 0 8px 8px; */
   /*   background-color: rgba($accent-color-2-pure, 0.1); */
-
+  @media (min-width: $larger-phone) {
+    margin-bottom: $spacer-s;
+  }
   p {
     padding-right: $spacer-xs;
     border-right: 1px solid rgba($accent-color-2-pure, 0.3);

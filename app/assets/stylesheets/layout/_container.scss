@@ -13,9 +13,6 @@
   flex-direction: column;
   flex: 1;
   gap: $spacer-m;
-  @media (min-width: $larger-phone) {
-    flex: 0;
-  }
 }
 
 .newsletter__container {
