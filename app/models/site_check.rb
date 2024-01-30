@@ -5,7 +5,5 @@ class SiteCheck < ApplicationRecord
     site_images.sum(:size_kb)
   end
 
-  def size_in_kb
-    size_kb * 0.01
-  end
+
 end
