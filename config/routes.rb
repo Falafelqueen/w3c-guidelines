@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   resources :site_checks, only: [:create, :new] do
     get "new_image_export", to: "images_export#new", as: :new_image_export
   end
+  get "tools", to: "pages#tools"
   get "tools/images", to: "site_checks#new"
 end
