@@ -1,0 +1,7 @@
+<%= turbo_stream.replace 'data-table' do %>
+  <%= render partial: "site_images_table",
+  locals: {
+    site_images: @site.site_images,
+    total_size: @site.total_image_size,
+  } %>
+<% end %>

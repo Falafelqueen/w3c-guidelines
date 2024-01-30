@@ -1,8 +1,12 @@
 .wrapper {
   width: 90%;
   margin: 3rem auto;
+  /* if turbo frame is a direct child of the wraper, it should be a block so the spacing is set */
+  & > turbo-frame {
+    display: block;
+  }
 }
 
 .wrapper > * + * {
-  margin-top: $spacer-m
+  margin-top: $spacer-m;
 }

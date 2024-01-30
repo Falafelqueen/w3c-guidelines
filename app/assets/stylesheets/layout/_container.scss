@@ -29,3 +29,14 @@
     flex-direction: row;
   }
 }
+
+.container-centered {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.container-spaced-m {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer-m;
+}

@@ -1,0 +1,36 @@
+.table {
+  border-spacing: 0px;
+  th,
+  td {
+    padding: $spacer-xs;
+  }
+}
+
+.table-rounded {
+  border-collapse: separate;
+  border-left: 0;
+  border-radius: $rounded-s;
+  border: 1px solid rgba($primary-dark, 0.2);
+  th:first-of-type {
+    border-top-left-radius: $rounded-s;
+  }
+  th:last-of-type {
+    border-top-right-radius: $rounded-s;
+  }
+  tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: $rounded-s;
+  }
+  tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: $rounded-s;
+  }
+}
+
+.table-striped {
+  thead tr {
+    background-color: $primary-dark;
+    color: white;
+  }
+  tbody tr:nth-child(even) {
+    background-color: rgba($accent-color-2-pure, 0.2);
+  }
+}

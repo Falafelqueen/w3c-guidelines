@@ -65,3 +65,8 @@ end
 gem 'bcrypt_pbkdf'
 gem 'ed25519'
 gem 'bigdecimal'
+
+# Used for crawling sites
+
+gem 'nokogiri'
+gem 'httparty'

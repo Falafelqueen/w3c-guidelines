@@ -10,4 +10,8 @@ Rails.application.routes.draw do
 
   get "components", to: "pages#test", as: "test"
   get "about", to: "pages#about"
+
+  resources :site_checks, only: [:create, :new]
+  get "tools/images", to: "site_checks#new"
+  get "new_image_export", to: "images_export#new", as: :new_image_export
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_21_115738) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_29_165058) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_21_115738) do
     t.string "link_url"
   end
 
+  create_table "site_checks", force: :cascade do |t|
+    t.string "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "site_images", force: :cascade do |t|
+    t.bigint "site_check_id", null: false
+    t.string "url"
+    t.integer "size"
+    t.integer "size_kb"
+    t.string "format"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["site_check_id"], name: "index_site_images_on_site_check_id"
+  end
+
   add_foreign_key "benefits", "guidelines"
   add_foreign_key "criteria", "guidelines"
+  add_foreign_key "site_images", "site_checks"
 end

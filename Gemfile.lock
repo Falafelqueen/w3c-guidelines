@@ -110,6 +110,9 @@ GEM
     ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
@@ -130,6 +133,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.21.2)
+    multi_xml (0.6.0)
     mutex_m (0.2.0)
     net-imap (0.4.9.1)
       date
@@ -273,7 +277,9 @@ DEPENDENCIES
   dotenv-rails
   ed25519
   erb-formatter
+  httparty
   jsbundling-rails
+  nokogiri
   pagy (~> 5.10, >= 5.10.1)
   pg (~> 1.1)
   puma (~> 5.0)
