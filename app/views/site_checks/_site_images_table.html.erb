@@ -1,5 +1,5 @@
 <%= turbo_frame_tag :data_table do %>
-  <div class="container-centered container-spaced-m">
+  <div class="container-centered container-spaced-m mt-l">
     <h2>Images for
       <span class="text-accent-color-2">
         <%= @site.url %>
@@ -12,7 +12,10 @@
           <th>Format</th>
           <th>Size in KB</th>
           <th>
-            <%= link_to "E", site_check_new_image_export_path(@site, format: :csv) %></th>
+            <%= link_to site_check_new_image_export_path(@site, format: :csv) do %>
+              <%= image_tag "export_icon_white.svg", height: 28, widht: 28, alt: "", title: 'Export to csv' %>
+            <% end %>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +31,7 @@
           <th>Total:</th>
           <td></td>
           <td><%= total_size %></td>
+          <td></td>
         </tr>
       </tbody>
     </table>

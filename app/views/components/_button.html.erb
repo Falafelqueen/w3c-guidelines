@@ -1,3 +1,5 @@
 <% text = text || "Text" %>
 <% url = url || "#" %>
-<%= link_to text, url, class: "btn btn-primary" %>
+<%# size - optional argument [s,m,l,xl] %>
+<% size = "btn-#{size}" || "" %>
+<%= link_to text, url, class: "btn btn-primary #{size}" %>

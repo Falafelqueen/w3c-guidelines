@@ -10,6 +10,15 @@
   &.btn-s {
     padding: $spacer-xxs $spacer-xs;
   }
+  &.btn-m {
+    padding: $spacer-xs $spacer-s;
+  }
+  &.btn-l {
+    padding: $spacer-m $spacer-xl;
+  }
+  &.btn-xl {
+    padding: $spacer-l $spacer-xxxl;
+  }
 
   &.btn-primary {
     background-color: $accent-color-2-pure;

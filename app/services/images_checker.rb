@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'httparty'
 
-class ImagesCheckerService
+class ImagesChecker
   def self.log_images(url)
     new(url).log_images
   end

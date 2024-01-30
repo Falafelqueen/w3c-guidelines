@@ -12,10 +12,6 @@ body {
   background-color: $primary-light;
   color: $primary-dark;
   font-family: "Nunito", "Arial", sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 h1,
@@ -62,4 +58,34 @@ h6 {
 
 .full-width {
   width: 100%;
+}
+
+.header-s {
+  font-size: $font-size;
+  /* on large screen's don't strech on the page */
+  @media (min-width: $desktop) {
+    max-width: 75%;
+  }
+}
+
+.header-m {
+  font-size: $font-size-m;
+  /* on large screen's don't strech on the page */
+  @media (min-width: $desktop) {
+    max-width: 75%;
+  }
+}
+
+.header-xxl {
+  font-size: $font-size-xxl;
+  line-height: 1.1;
+  /* on large screen's don't strech on the page */
+  @media (min-width: $desktop) {
+    max-width: 75%;
+  }
+}
+
+/* Margins */
+.mt-l {
+  margin-top: $spacer-l;
 }

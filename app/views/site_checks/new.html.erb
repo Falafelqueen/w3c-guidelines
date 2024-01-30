@@ -1,2 +1,10 @@
-<%= render "components/url_form", model: @site %>
+<h1 class="header-m">Get an overview your website's images</h1>
+<h2 class="header-xxl">How do you find out what images are on your page? Very easily.
+</h2>
+<p class="header-s">Paste an URL and get the list of all images used on that page. Having an
+  inventory of your page's images is the first step towards optimizing them and
+  making your website more sustainable.</p>
+<%= render "components/url_form",
+model: @site,
+submit_text: "Get inventory of images" %>
 <turbo-frame id="data-table"></turbo-frame>

@@ -3,4 +3,7 @@
   border-radius: $rounded-s;
   min-width: 250px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  &.form__input-l {
+    padding: $spacer-m $spacer-xl;
+  }
 }

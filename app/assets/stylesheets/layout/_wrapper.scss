@@ -1,6 +1,9 @@
 .wrapper {
   width: 90%;
   margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   /* if turbo frame is a direct child of the wraper, it should be a block so the spacing is set */
   & > turbo-frame {
     display: block;
@@ -8,5 +11,10 @@
 }
 
 .wrapper > * + * {
-  margin-top: $spacer-m;
+  margin-top: $spacer-xl;
+}
+
+.page__wrapper {
+  @extend .wrapper;
+  min-height: 80vh;
 }

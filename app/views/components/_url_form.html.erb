@@ -1,6 +1,9 @@
+<%# model is a manadatory local variable, it needs to be an ActiveRecord instance with attribute url %>
+<%# submit text is an optional local variable that determins the text on submit btn %>
+<% submit_text = submit_text || "Check url" %>
 <div class="text-center">
   <%= form_with model: model do |f| %>
-    <%= f.text_field :url, class: "form__input" %>
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.text_field :url, class: "form__input form__input-l" %>
+    <%= f.submit submit_text, class: "btn btn-primary btn-l" %>
   <% end %>
 </div>

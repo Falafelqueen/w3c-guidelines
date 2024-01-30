@@ -3,7 +3,7 @@
 <% dropdown_options = [
   '<a href="#">Option 1</a>',
   '<a href="#">Option 2</a>',
-  '<a class="active" href="#">Option 3</a>'
+  '<a class="active" href="#">Option 3</a>',
 ] %>
 <%= render "components/dropdown", text: "Sort", items: dropdown_options %>
 
@@ -16,7 +16,13 @@
 <%= render "components/newsletter_sign_up_form" %>
 
 <h2>Buttons</h2>
-<%= render "components/button" %>
+<div class="row">
+  <%= render "components/button", text: "default" %>
+  <%= render "components/button", size: "s", text: "size s" %>
+  <%= render "components/button", size: "m", text: "size m" %>
+  <%= render "components/button", size: "l", text: "size l" %>
+  <%= render "components/button", size: "xl", text: "size xl" %>
+</div>
 
 <h2>Table</h2>
 <%= render "components/table" %>
