@@ -13,7 +13,11 @@
           <th>Size in KB</th>
           <th>
             <%= link_to site_check_new_image_export_path(@site, format: :csv) do %>
-              <%= image_tag "export_icon_white.svg", height: 28, widht: 28, alt: "", title: 'Export to csv' %>
+              <%= image_tag "export_icon_white.svg",
+              height: 28,
+              widht: 28,
+              alt: "",
+              title: "Export to csv" %>
             <% end %>
           </th>
         </tr>
@@ -23,7 +27,7 @@
           <tr lass="table__row">
             <td><%= shorten_url_with_ellipsis(image.url) %></td>
             <td><%= image.format %></td>
-            <td><%= image.size_kb %></td>
+            <td><%= image.size_in_kb %>kb</td>
             <td></td>
           </tr>
         <% end %>

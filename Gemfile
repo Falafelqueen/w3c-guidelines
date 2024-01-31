@@ -70,3 +70,4 @@ gem 'bigdecimal'
 
 gem 'nokogiri'
 gem 'httparty'
+gem 'base64'
