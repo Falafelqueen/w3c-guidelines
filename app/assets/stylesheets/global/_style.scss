@@ -78,7 +78,7 @@ h6 {
 
 .header-xxl {
   font-size: $font-size-xxl;
-  line-height: 1.1;
+  line-height: 1;
   /* on large screen's don't strech on the page */
   @media (min-width: $desktop) {
     max-width: 75%;

@@ -56,3 +56,16 @@
   flex-direction: column;
   gap: $spacer-m;
 }
+.container-spaced-s {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer-s;
+}
+
+.container-heavy-text {
+  margin-inline: auto;
+  line-height: 1.6;
+  @media (min-width: $tablet) {
+    max-width: 70%;
+  }
+}
