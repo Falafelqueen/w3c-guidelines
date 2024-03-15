@@ -24,8 +24,11 @@ class ImagesChecker
       puts "resource url"
       puts resource_url
       image = fetch_image_info(resource_url)
-      total_size += image[:size]
-      image_info << image
+      # skip fonts
+      unless image[:format].upcase.in?(["WOFF","WOFF2","TTF","OTF","EOT"])
+        total_size += image[:size]
+        image_info << image
+      end
     end
     Rails.logger.debug "Total image count: #{image_info.length} | #{(total_size.to_f / 1.0.megabyte).round(2)}MB"
     {images: image_info, total_size: total_size}
@@ -42,10 +45,7 @@ class ImagesChecker
   def extract_images_urls(html)
     doc = Nokogiri::HTML(html)
     urls = []
-       puts "--------------"
-    puts "raw html"
-    puts doc
-      puts "--------------"
+
     # Extract URLs from <img> tags
     doc.css('img').each do |element|
       url = element['src']
@@ -64,16 +64,15 @@ class ImagesChecker
 
     puts "----------------------"
     puts "Stylesheet"
-    puts doc.css('link[rel="stylesheet"]')
+    pp doc.css('link')
     puts "----------------------"
-    # Getting bcg images from css files
-    doc.css('link[rel="stylesheet"]').each do |link|
-      puts "----------------"
-      puts "css link"
-      puts link
-      puts "----------------"
-      css_url = URI.join(@url, link['href']).to_s if link['href']
-      urls += extract_images_from_css(css_url) if css_url
+    # Getting all the links
+    doc.css('link').each do |link|
+      # Getting only css files
+      if link.to_s.match?(/css/)
+        css_url = URI.join(@url, link['href']).to_s if link['href']
+        urls += extract_images_from_css(css_url) if css_url
+      end
     end
     # selecting background images from inline styling
 
@@ -81,6 +80,10 @@ class ImagesChecker
   end
 
   def fetch_image_info(url)
+    puts "--------------"
+    puts "logging from fetch_image_info"
+    puts url
+    puts "--------------"
     # for links
     if url.match?(/^http/)
       response = HTTParty.get(url, follow_redirects: true)
@@ -124,20 +127,25 @@ class ImagesChecker
     response.body
     rescue StandardError => e
     Rails.logger.error "Failed to fetch CSS file: #{url}, error: #{e.message}"
-    ""
   end
 
   def extract_css_background_url(style)
     return nil unless style
-
+    puts "Extracting css background url"
     # This regex looks for the url() pattern in CSS
-    match = style.match(/url\((['"]?)(.*?)\1\)/)
+    puts style
+    puts "-----------------"
+    match = style.match(/background-image:.*?url\((['"]?)(.*?)\1\)/)
     match ? match[2] : nil
   end
 
   def extract_images_from_css(css_url)
+    puts "-----------------"
+    puts "Extracting images from css file"
+    puts css_url
+    puts "-----------------"
     css_content = fetch_css(css_url)
-    css_image_urls = css_content.scan(/url\((['"]?)(.*?)\1\)/).map { |match| match[1] }
+    css_image_urls = css_content.scan(/background-image:.*?url\((['"]?)(.*?)\1\)/).map { |match| match[1] }
     css_image_urls.map { |url| URI.join(css_url, url).to_s }
   end
 

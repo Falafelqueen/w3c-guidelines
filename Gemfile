@@ -71,3 +71,5 @@ gem 'bigdecimal'
 gem 'nokogiri'
 gem 'httparty'
 gem 'base64'
+
+gem 'css_parser'
