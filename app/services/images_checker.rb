@@ -31,6 +31,7 @@ class ImagesChecker
       end
     end
     Rails.logger.debug "Total image count: #{image_info.length} | #{(total_size.to_f / 1.0.megabyte).round(2)}MB"
+    puts "Total image count: #{image_info.length} | #{(total_size.to_f / 1.0.megabyte).round(2)}MB"
     {images: image_info, total_size: total_size}
   end
 
@@ -38,7 +39,8 @@ class ImagesChecker
 
   def fetch_html(url)
     Rails.logger.debug "Fetching url"
-    response = HTTParty.get(url)
+    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+    response = HTTParty.get(url, headers: {"User-Agent" => user_agent})
     response.body
   end
 
@@ -56,9 +58,9 @@ class ImagesChecker
     doc.css('style').each do |element|
       puts "--------------"
       puts "CSS bcg"
-      puts element.text
-      puts "-------------"
       css_url = extract_css_background_url(element.text)
+      puts css_url
+      puts "-------------"
       urls << URI.join(@url, css_url).to_s if css_url
     end
 
@@ -80,20 +82,21 @@ class ImagesChecker
   end
 
   def fetch_image_info(url)
-    puts "--------------"
+    puts "-------------------"
     puts "logging from fetch_image_info"
     puts url
-    puts "--------------"
+    puts "-------------------"
     # for links
     if url.match?(/^http/)
-      response = HTTParty.get(url, follow_redirects: true)
+      user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+      response = HTTParty.get(url, follow_redirects: true, headers: {"User-Agent" => user_agent})
       format = extract_image_format(response.headers["content-type"],url)
 
-      puts "--------------"
-      puts url
+      puts "if url.match?(/^http/)"
+      puts "content-length #{response.headers["content-length"]}"
       puts format
       puts "#{response.body.bytesize} bytes #{response.body.bytesize * 0.001}kb"
-      puts "--------------"
+      puts "-------------------"
       {
         url: url,
         size: response.body.bytesize,
@@ -123,7 +126,7 @@ class ImagesChecker
   end
 
   def fetch_css(url)
-    response = HTTParty.get(url)
+    response = http_get(url)
     response.body
     rescue StandardError => e
     Rails.logger.error "Failed to fetch CSS file: #{url}, error: #{e.message}"
@@ -171,8 +174,6 @@ class ImagesChecker
     end
   end
 
-
-
   def svg_byte_size(data_url)
     if data_url.include?('base64')
       # Extract and decode Base64 SVG data
@@ -185,5 +186,10 @@ class ImagesChecker
     end
 
     svg_data.bytesize
+  end
+
+  def http_get(url)
+    user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+    HTTParty.get(url, headers: {"User-Agent" => user_agent})
   end
 end

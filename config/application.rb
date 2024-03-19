@@ -20,6 +20,9 @@ module W3cGuidelines
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.generators.test_framework :rspec, fixtures: true
+    config.generators.fixture_replacement :factory_bot, dir: "spec/factories"
+
     # Don't generate system test files.
     config.generators.system_tests = nil
   end
