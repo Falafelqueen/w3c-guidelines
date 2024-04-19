@@ -4,6 +4,8 @@ require 'uri'
 require 'base64'
 
 class ImagesChecker
+  include CssParser
+
   def self.log_images(url)
     new(url).log_images
   end
@@ -11,6 +13,7 @@ class ImagesChecker
   def initialize(url)
     Rails.logger.debug "Started image logging process"
     @url = url
+    @doc = ""
   end
 
   def log_images
@@ -21,8 +24,10 @@ class ImagesChecker
     resource_urls = extract_images_urls(html)
 
     resource_urls.each do |resource_url|
-      puts "resource url"
-      puts resource_url
+      #puts "--------------"
+      #puts "resource url"
+      #puts resource_url
+      #puts "--------------"
       image = fetch_image_info(resource_url)
       # skip fonts
       unless image[:format].upcase.in?(["WOFF","WOFF2","TTF","OTF","EOT"])
@@ -45,34 +50,42 @@ class ImagesChecker
   end
 
   def extract_images_urls(html)
-    doc = Nokogiri::HTML(html)
+    @doc = Nokogiri::HTML(html)
     urls = []
 
     # Extract URLs from <img> tags
-    doc.css('img').each do |element|
+    @doc.css('img').each do |element|
       url = element['src']
       urls << URI.join(@url, url).to_s
     end
 
     # Extract URLs from inline CSS background images
-    doc.css('style').each do |element|
-      puts "--------------"
-      puts "CSS bcg"
+    @doc.css('style').each do |element|
+      #puts "--------------"
+      #puts "CSS bcg"
       css_url = extract_css_background_url(element.text)
-      puts css_url
-      puts "-------------"
+      #puts css_url
+      #puts "-------------"
       urls << URI.join(@url, css_url).to_s if css_url
     end
 
-    puts "----------------------"
-    puts "Stylesheet"
-    pp doc.css('link')
-    puts "----------------------"
-    # Getting all the links
-    doc.css('link').each do |link|
+    #puts "----------------------"
+    #puts "Stylesheet"
+    #puts @doc.css('link')
+    #puts "----------------------"
+
+    style_declarations = UnusedCssRemover.new(@url).remove_unused_styles
+
+
+
+
+    @doc.css('link').each do |link|
       # Getting only css files
-      if link.to_s.match?(/css/)
+      if link.to_s.match?(/\.css/)
         css_url = URI.join(@url, link['href']).to_s if link['href']
+        puts "______________"
+        pp css_url
+        puts "______________"
         urls += extract_images_from_css(css_url) if css_url
       end
     end
@@ -82,21 +95,21 @@ class ImagesChecker
   end
 
   def fetch_image_info(url)
-    puts "-------------------"
-    puts "logging from fetch_image_info"
-    puts url
-    puts "-------------------"
+    #puts "-------------------"
+    #puts "logging from fetch_image_info"
+    #puts url
+    #puts "-------------------"
     # for links
     if url.match?(/^http/)
       user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
       response = HTTParty.get(url, follow_redirects: true, headers: {"User-Agent" => user_agent})
       format = extract_image_format(response.headers["content-type"],url)
 
-      puts "if url.match?(/^http/)"
-      puts "content-length #{response.headers["content-length"]}"
-      puts format
-      puts "#{response.body.bytesize} bytes #{response.body.bytesize * 0.001}kb"
-      puts "-------------------"
+      #puts "if url.match?(/^http/)"
+      #puts "content-length #{response.headers["content-length"]}"
+      #puts format
+      #puts "#{response.body.bytesize} bytes #{response.body.bytesize * 0.001}kb"
+      #puts "-------------------"
       {
         url: url,
         size: response.body.bytesize,
@@ -132,20 +145,44 @@ class ImagesChecker
     Rails.logger.error "Failed to fetch CSS file: #{url}, error: #{e.message}"
   end
 
+  # used to get bcg images from HTML inline styling
   def extract_css_background_url(style)
     return nil unless style
-    puts "Extracting css background url"
-    # This regex looks for the url() pattern in CSS
-    puts style
-    puts "-----------------"
+    #puts "--------------"
+    #puts "Extracting css background url"
+    ## This regex looks for the url() pattern in CSS
+    #puts style
+    #puts "-----------------"
     match = style.match(/background-image:.*?url\((['"]?)(.*?)\1\)/)
     match ? match[2] : nil
   end
 
+  # used to get bcg images from CSS
   def extract_images_from_css(css_url)
     puts "-----------------"
     puts "Extracting images from css file"
     puts css_url
+    parser = CssParser::Parser.new
+    parser.load_uri!(css_url)
+    ## Find all the applied rule sets
+    #if css_url.match?(/_home/)
+    #  binding.pry
+    #end
+    css_rules = []
+    #applied_css_selectors.each do |selector|
+    #  #puts selector
+    #  css_rule_sets = []
+    #  parser.each_selector do |sel,d|
+    #    # too vague
+    #    if sel.include?(selector) && !css_rule_sets.include?(sel)
+    #      css_rules << d
+    #      css_rule_sets << sel
+    #    end
+    #  end
+    #end
+    #pp css_rules
+    # pp css_rules
+    UnusedCssRemover.new(@url).remove_unused_styles
     puts "-----------------"
     css_content = fetch_css(css_url)
     css_image_urls = css_content.scan(/background-image:.*?url\((['"]?)(.*?)\1\)/).map { |match| match[1] }
@@ -191,5 +228,22 @@ class ImagesChecker
   def http_get(url)
     user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
     HTTParty.get(url, headers: {"User-Agent" => user_agent})
+  end
+
+  # returns an array of applied css selectors
+  # used to get background images
+  def applied_css_selectors
+    selectors = []
+    @doc.traverse do |node|
+      if node.element?
+        selectors << "##{node['id']}" if node['id']
+
+      # Handle class selectors (splitting in case of multiple classes)
+        node['class'].to_s.split.each do |cls|
+          selectors << ".#{cls}"
+        end
+      end
+    end
+    selectors.uniq
   end
 end
