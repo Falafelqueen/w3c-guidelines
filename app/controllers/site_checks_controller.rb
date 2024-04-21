@@ -8,7 +8,10 @@ class SiteChecksController < ApplicationController
     @site = SiteCheck.find_by(url: url)
     unless @site
       @site =  SiteCheck.new(site_check_params)
-      images_info = ImagesChecker.log_images(@site.url)
+
+      render :new and return unless @site.valid?
+
+      images_info = JsImagesChecker.log_images(@site.url)
       @total_image_size = images_info[:total_size]
       images_info[:images].each do |image|
         @site.site_images << SiteImage.new(image)

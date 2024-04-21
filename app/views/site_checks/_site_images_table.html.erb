@@ -27,14 +27,14 @@
           <tr lass="table__row">
             <td><%= shorten_url_with_ellipsis(image.url) %></td>
             <td><%= image.format %></td>
-            <td><%= image.size_in_kb %>kb</td>
+            <td><%= image.size_kb %>kb</td>
             <td></td>
           </tr>
         <% end %>
         <tr class="table__row">
           <th>Total:</th>
           <td></td>
-          <td><%= total_size %></td>
+          <td><%= total_images_size_with_unit(total_size) %></td>
           <td></td>
         </tr>
       </tbody>

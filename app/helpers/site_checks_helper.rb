@@ -5,4 +5,12 @@ module SiteChecksHelper
     part_length = (max_length - 3) / 2 # 3 is for the ellipsis length
     "#{url[0...part_length]}...#{url[-part_length..]}"
   end
+
+  def total_images_size_with_unit(size)
+    if size < 1000
+      "#{size}KB"
+    else
+      "#{(size / 1000).round(2)}MB"
+    end
+  end
 end
