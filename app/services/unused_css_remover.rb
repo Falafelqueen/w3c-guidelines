@@ -6,6 +6,10 @@ require 'base64'
 class UnusedCssRemover
   include CssParser
 
+  def self.used_styles(url)
+    new(url).used_styles
+  end
+
   def initialize(url)
     @url = url
     @doc =  Nokogiri::HTML(fetch_html(@url))
@@ -15,10 +19,17 @@ class UnusedCssRemover
 
   # get all the css files
 
+
+  def used_styles
+    remove_unused_styles
+    @used_css_declarations.join()
+  end
+
+
   def remove_unused_styles
     css_urls = fetch_css_urls
     css_urls.each do |css_url|
-      get_used_css_selectors(css_url)
+      get_used_css_selectors_by_parsing(css_url)
     end
   end
 
@@ -27,7 +38,35 @@ class UnusedCssRemover
 
 
   private
-  def get_used_css_selectors(css_url)
+
+  def get_used_css_from_style_tag
+    @doc.css('style').each do |style_tag|
+      css = style_tag.content
+      parse_used_css(css)
+    end
+  end
+
+
+  def parse_used_css(css)
+    parser = CssParser::Parser.new
+    parser.add_block!(css)
+    parser.each_selector do |selector, declaration, specificity, media_types|
+    puts "Processing selector: #{selector}"  # Debug output to see which selector is processed
+    next if selector.match?(/[:@]/)  # Skip pseudo-classes and media queries
+
+      begin
+        element = @doc.css(selector)
+        unless element.empty?
+          @used_css_selectors << selector
+          @used_css_declarations << declaration
+        end
+      rescue Nokogiri::CSS::SyntaxError => e
+        puts "Handled CSS Syntax Error: #{e.message} for selector: #{selector}"
+      end
+    end
+  end
+
+  def get_used_css_selectors_by_parsing(css_url)
     puts "breaking here"
     parser = CssParser::Parser.new
     parser.load_uri!(css_url)
@@ -51,10 +90,12 @@ class UnusedCssRemover
     end
   end
 
+
+
   def fetch_html(url)
     Rails.logger.debug "Fetching url"
     user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-    response = HTTParty.get(url, headers: {"User-Agent" => user_agent})
+    response = HTTParty.get(url, headers: {"User-Agent" => user_agent, "Cache-Control" => "no-cache, no-store, must-revalidate"})
     response.body
   end
 
@@ -72,7 +113,7 @@ class UnusedCssRemover
 
   def http_get(url)
     user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-    HTTParty.get(url, headers: {"User-Agent" => user_agent})
+    HTTParty.get(url, headers: {"User-Agent" => user_agent, "Cache-Control" => "no-cache, no-store, must-revalidate"})
   end
 
 end

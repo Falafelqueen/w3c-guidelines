@@ -45,7 +45,7 @@ class ImagesChecker
   def fetch_html(url)
     Rails.logger.debug "Fetching url"
     user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-    response = HTTParty.get(url, headers: {"User-Agent" => user_agent})
+    response = HTTParty.get(url, headers: {"User-Agent" => user_agent, "Cache-Control" => "no-cache, no-store, must-revalidate"})
     response.body
   end
 
@@ -60,38 +60,23 @@ class ImagesChecker
     end
 
     # Extract URLs from inline CSS background images
-    @doc.css('style').each do |element|
-      #puts "--------------"
-      #puts "CSS bcg"
-      css_url = extract_css_background_url(element.text)
-      #puts css_url
-      #puts "-------------"
-      urls << URI.join(@url, css_url).to_s if css_url
-    end
+    # @doc.css('style').each do |element|
+    #   #puts "--------------"
+    #   #puts "CSS bcg"
+    #   css_url = extract_css_background_url(element.text)
+    #   #puts css_url
+    #   #puts "-------------"
+    #   urls << URI.join(@url, css_url).to_s if css_url
+    # end
 
     #puts "----------------------"
     #puts "Stylesheet"
     #puts @doc.css('link')
     #puts "----------------------"
-
-    style_declarations = UnusedCssRemover.new(@url).remove_unused_styles
-
-
-
-
-    @doc.css('link').each do |link|
-      # Getting only css files
-      if link.to_s.match?(/\.css/)
-        css_url = URI.join(@url, link['href']).to_s if link['href']
-        puts "______________"
-        pp css_url
-        puts "______________"
-        urls += extract_images_from_css(css_url) if css_url
-      end
-    end
+    urls << extract_images_from_css
     # selecting background images from inline styling
 
-    urls.uniq
+    urls.flatten.uniq
   end
 
   def fetch_image_info(url)
@@ -158,35 +143,12 @@ class ImagesChecker
   end
 
   # used to get bcg images from CSS
-  def extract_images_from_css(css_url)
-    puts "-----------------"
-    puts "Extracting images from css file"
-    puts css_url
-    parser = CssParser::Parser.new
-    parser.load_uri!(css_url)
-    ## Find all the applied rule sets
-    #if css_url.match?(/_home/)
-    #  binding.pry
-    #end
-    css_rules = []
-    #applied_css_selectors.each do |selector|
-    #  #puts selector
-    #  css_rule_sets = []
-    #  parser.each_selector do |sel,d|
-    #    # too vague
-    #    if sel.include?(selector) && !css_rule_sets.include?(sel)
-    #      css_rules << d
-    #      css_rule_sets << sel
-    #    end
-    #  end
-    #end
-    #pp css_rules
-    # pp css_rules
-    UnusedCssRemover.new(@url).remove_unused_styles
-    puts "-----------------"
-    css_content = fetch_css(css_url)
+  def extract_images_from_css
+    css_content = UnusedCssRemover.used_styles(@url)
     css_image_urls = css_content.scan(/background-image:.*?url\((['"]?)(.*?)\1\)/).map { |match| match[1] }
-    css_image_urls.map { |url| URI.join(css_url, url).to_s }
+    #binding.pry
+    #css_image_urls.map { |url| URI.join(css_url, url).to_s }
+    #binding.pry
   end
 
   def extract_image_format(content_type,url)
@@ -227,7 +189,7 @@ class ImagesChecker
 
   def http_get(url)
     user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-    HTTParty.get(url, headers: {"User-Agent" => user_agent})
+    HTTParty.get(url, headers: {"User-Agent" => user_agent, "Cache-Control" => "no-cache, no-store, must-revalidate"})
   end
 
   # returns an array of applied css selectors
