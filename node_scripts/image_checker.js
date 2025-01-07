@@ -4,6 +4,7 @@ const puppeteer = require("puppeteer");
  * Extracts visible images from a given URL and logs their details.
  * @param {string} url - The URL to extract images from.
  */
+
 async function extractVisibleImages(url) {
   let browser;
   try {
@@ -16,8 +17,8 @@ async function extractVisibleImages(url) {
     await page.goto(url, { waitUntil: "networkidle0" });
 
     const images = await extractAndFilterImages(page);
-    const loadedImages = await filterLoadedImages(images, page);
-    const imageDetails = await fetchImageDetails(loadedImages, page);
+    // const loadedImages = await filterLoadedImages(images, page);
+    const imageDetails = await fetchImageDetails(images, page);
 
     console.log(JSON.stringify(imageDetails));
   } catch (error) {
@@ -80,11 +81,17 @@ async function filterLoadedImages(images, page) {
 }
 
 async function fetchImageDetails(images, page) {
+  console.error("Fetching image details...");
+  console.log("images", images);
+  // TODO: need to be able to handle images srcset and picture elements
   try {
     return Promise.all(
       images.map((src) =>
+        console.log("Fetching details for:", src),
         page.evaluate(async (src) => {
+          console.error("Fetching details for:", src);
           const response = await fetch(src);
+          console.error("Response status:", response.status);
           const buffer = await response.arrayBuffer();
           return {
             url: src,
